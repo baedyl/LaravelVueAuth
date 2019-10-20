@@ -1,8 +1,8 @@
 <?php
 
-header('Access-Control-Allow-Origin:  *');
+/*header('Access-Control-Allow-Origin:  *');
 header('Access-Control-Allow-Methods:  POST, GET, OPTIONS, PUT, DELETE');
-header('Access-Control-Allow-Headers:  Content-Type, X-Auth-Token, Origin, Authorization');
+header('Access-Control-Allow-Headers:  Content-Type, X-Auth-Token, Origin, Authorization');*/
 
 use Illuminate\Http\Request;
 
@@ -18,11 +18,35 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::prefix('v1')->group(function() {
+    Route::prefix('auth')->group(function() {
+        // Below mention routes are public, user can access those without any restriction.
+        // Create New User
+        Route::post('register', 'AuthController@register');
+        // Login User
+        Route::post('login', 'AuthController@login');
+        
+        // Refresh the JWT Token
+        Route::get('refresh', 'AuthController@refresh');
+        
+        // Below mention routes are available only for the authenticated users.
+        Route::middleware('auth:api')->group(function () {
+            // Get user info
+            Route::get('user', 'AuthController@user');
+            // Logout user from application
+            Route::post('logout', 'AuthController@logout');
+        });
+    });
+});
+
+/*Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// Create a new user
 Route::post('auth/register', 'AuthController@register');
+
+// Login user
 Route::post('auth/login', 'AuthController@login');
 
 Route::group(['middleware' => 'jwt.auth'], function() {
@@ -30,4 +54,4 @@ Route::group(['middleware' => 'jwt.auth'], function() {
 });
 Route::group(['middleware' => 'jwt.refresh'], function() {
     Route::get('auth/refresh', 'AuthController@refresh');
-});
+});*/
