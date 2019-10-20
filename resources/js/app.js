@@ -1,3 +1,39 @@
+require('./bootstrap.js');
+
+import Vue from 'vue';
+import 'es6-promise/auto';
+import axios from 'axios';
+import VueAxios from 'vue-axios';
+import VueRouter from 'vue-router';
+import VueAuth from '@websanova/vue-auth';
+
+import auth from '../auth.js';
+import router from '../router.js';
+import Index from './Index.vue';
+
+// Set vue globally
+window.Vue = Vue;
+
+
+// set Vue Router
+Vue.router = router;
+Vue.use(VueRouter);
+
+// Set Vue authentication
+Vue.use(VueAxios, axios);
+axios.defaults.baseURL = `${process.env.MIX_APP_URL}/api/v1`;
+
+Vue.use(VueAuth, auth);
+
+// Load Index
+Vue.component('index', Index);
+
+const app = new Vue({
+    el: '#app',
+    router
+});
+
+/*
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import axios from 'axios';
@@ -65,9 +101,4 @@ Vue.use(require('@websanova/vue-auth'), {
 App.router = Vue.router;
 
 new Vue(App).$mount('#app');
-
-/*new Vue({
-    el: '#app',
-    router: router,
-    render: app => app(App)
-})*/
+*/
