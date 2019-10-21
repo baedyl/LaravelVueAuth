@@ -5,6 +5,9 @@
         <div class="card card-default">
           <div class="card-header">New Password</div>
           <div class="card-body">
+            <div class="alert alert-danger" v-if="has_error && !success">
+                <p>There was some error(s), unable to reset password!</p>
+            </div>
             <!-- <ul v-if="errors">
               <li v-for="error in errors" v-bind:key="error">{{ msg }}</li>
             </ul> -->
@@ -37,24 +40,33 @@ export default {
         email: null,
         password: null,
         password_confirmation: null,
-        has_error: false
+        has_error: false,
+        errors: {},
+        success: false
       }
     },
     methods: {
-        resetPassword() {
-            this.$http.post("/auth/reset/password/", {
-                token: this.$route.params.token,
-                email: this.email,
-                password: this.password,
-                password_confirmation: this.password_confirmation
-            })
-            .then(result => {
-                // console.log(result.data);
-                this.$router.push({name: 'login'})
-            }, error => {
-                console.error(error);
-            });
-        }
+      resetPassword() {
+        const app = this;
+  
+        this.$http.post("/auth/reset/password/" + this.$route.params.token, {
+            token: this.$route.params.token,
+            email: this.email,
+            password: this.password,
+            password_confirmation: this.password_confirmation
+        })
+        .then(result => {
+          // success
+          app.success = true;
+          this.$router.push({name: 'login'})
+        }, response => {
+          // error
+          console.log(response);
+          app.has_error = true;
+          app.errors = response.errors || {}
+
+        });
+      }
     }
 }
 

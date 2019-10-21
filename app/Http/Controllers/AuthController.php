@@ -16,8 +16,15 @@ use Illuminate\Support\Facades\Response;
 
 class AuthController extends Controller
 {
+    //use SendsPasswordResetEmails;
+    //use ResetsPasswords;
+    use SendsPasswordResetEmails, ResetsPasswords {
+        SendsPasswordResetEmails::broker insteadof ResetsPasswords;
+        ResetsPasswords::credentials insteadof SendsPasswordResetEmails;
+    }
     /*use ResetsPasswords, SendsPasswordResetEmails {
-        ResetsPasswords::broker insteadof SendsPasswordResetEmails;
+        SendsPasswordResetEmails::broker insteadof ResetsPasswords;
+        ResetsPasswords::credentials insteadof SendsPasswordResetEmails;
     }*/
     
     // Registration process
@@ -99,7 +106,7 @@ class AuthController extends Controller
      * @param  string  $response
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
-    public function sendResetLinkResponse(Request $request,$response) {
+    public function sendResetLinkResponse(Request $request, $response) {
         return response()->json([
             'message' => 'Reset password link sent.',
             'data' => $response

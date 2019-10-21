@@ -3139,6 +3139,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3146,25 +3149,33 @@ __webpack_require__.r(__webpack_exports__);
       email: null,
       password: null,
       password_confirmation: null,
-      has_error: false
+      has_error: false,
+      errors: {},
+      success: false
     };
   },
   methods: {
     resetPassword: function resetPassword() {
       var _this = this;
 
-      this.$http.post("/auth/reset/password/", {
+      var app = this;
+      this.$http.post("/auth/reset/password/" + this.$route.params.token, {
         token: this.$route.params.token,
         email: this.email,
         password: this.password,
         password_confirmation: this.password_confirmation
       }).then(function (result) {
-        // console.log(result.data);
+        // success
+        app.success = true;
+
         _this.$router.push({
           name: 'login'
         });
-      }, function (error) {
-        console.error(error);
+      }, function (response) {
+        // error
+        console.log(response);
+        app.has_error = true;
+        app.errors = response.errors || {};
       });
     }
   }
@@ -23034,6 +23045,14 @@ var render = function() {
           _c("div", { staticClass: "card-header" }, [_vm._v("New Password")]),
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
+            _vm.has_error && !_vm.success
+              ? _c("div", { staticClass: "alert alert-danger" }, [
+                  _c("p", [
+                    _vm._v("There was some error(s), unable to reset password!")
+                  ])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
             _c(
               "form",
               {
@@ -23178,34 +23197,32 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "card card-default" }, [
-        _c("div", { staticClass: "card-header" }, [_vm._v("Home")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body" }, [
-          _c("p", [
-            _vm._v(
-              "\n                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt amet tempora sint dolor nam quam quos inventore odio hic, enim beatae nulla in tenetur odit natus facere voluptas excepturi deleniti? Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur sit eligendi rem et minus dolor hic, placeat eum sequi ipsa, debitis ex magni. Hic laudantium consectetur aliquid eos fuga cumque.\n            "
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "card card-default" }, [
+      _c("div", { staticClass: "card-header" }, [_vm._v("Home")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        _vm._v("\n            Welcome to the home page!\n            "),
+        _c(
+          "p",
+          [
+            _c(
+              "router-link",
+              {
+                key: _vm.key,
+                staticClass: "nav-link",
+                attrs: { to: { name: "dashboard" } }
+              },
+              [_vm._v("Go to the dashboard")]
             )
-          ]),
-          _vm._v(" "),
-          _c("p", [
-            _vm._v(
-              "\n                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt amet tempora sint dolor nam quam quos inventore odio hic, enim beatae nulla in tenetur odit natus facere voluptas excepturi deleniti? Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur sit eligendi rem et minus dolor hic, placeat eum sequi ipsa, debitis ex magni. Hic laudantium consectetur aliquid eos fuga cumque.\n            "
-            )
-          ])
-        ])
+          ],
+          1
+        )
       ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
