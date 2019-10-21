@@ -3,7 +3,7 @@
         <div class="card card-default">
             <div class="card-header">Dashboard</div>
             <div class="card-body">
-                User Dashboard
+                Welcome to the empty dashboard!
             </div>
         </div>
     </div>

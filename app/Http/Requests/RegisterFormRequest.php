@@ -13,7 +13,8 @@ class RegisterFormRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        // Was falsy by default, could not process the request until truthy
+        return true;
     }
 
     /**
@@ -24,7 +25,7 @@ class RegisterFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|unique:users',
+            'name' => 'required|string',
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:6|max:12'
         ];

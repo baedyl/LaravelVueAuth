@@ -21,7 +21,7 @@ Vue.use(VueRouter);
 
 // Set Vue authentication
 Vue.use(VueAxios, axios);
-axios.defaults.baseURL = `${process.env.MIX_APP_URL}/api/v1`;
+axios.defaults.baseURL = `${process.env.MIX_APP_URL}/api`;
 
 Vue.use(VueAuth, auth);
 

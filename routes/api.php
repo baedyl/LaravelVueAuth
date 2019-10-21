@@ -18,25 +18,25 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::prefix('v1')->group(function() {
-    Route::prefix('auth')->group(function() {
-        // Below mention routes are public, user can access those without any restriction.
-        // Create New User
-        Route::post('register', 'AuthController@register');
-        // Login User
-        Route::post('login', 'AuthController@login');
-        
-        // Refresh the JWT Token
-        Route::get('refresh', 'AuthController@refresh');
-        
-        // Below mention routes are available only for the authenticated users.
-        Route::middleware('auth:api')->group(function () {
-            // Get user info
-            Route::get('user', 'AuthController@user');
-            // Logout user from application
-            Route::post('logout', 'AuthController@logout');
-        });
+Route::prefix('auth')->group(function () {
+    Route::post('register', 'AuthController@register');
+    Route::post('login', 'AuthController@login');
+    Route::get('refresh', 'AuthController@refresh');
+    Route::group(['middleware' => 'auth:api'], function(){
+        Route::get('user', 'AuthController@user');
+        Route::post('logout', 'AuthController@logout');
     });
+
+    // Send reset password mail
+    Route::post('reset-password', 'AuthController@sendPasswordResetLink');
+    // handle reset password form process
+    Route::post('reset/password', 'AuthController@callResetPassword');
+});
+
+Route::group(['middleware' => 'auth:api'], function(){
+    // Users
+    Route::get('users', 'UserController@index')->middleware('isAdmin');
+    Route::get('users/{id}', 'UserController@show')->middleware('isAdminOrSelf');
 });
 
 /*Route::middleware('auth:api')->get('/user', function (Request $request) {

@@ -5,6 +5,8 @@ import Home from './js/components/Home.vue';
 import Login from './js/components/Login.vue';
 import Register from './js/components/Register.vue';
 import Dashboard from './js/components/Dashboard.vue';
+import ForgotPassword from './js/components/ForgotPassword.vue';
+import ForgotPasswordForm from './js/components/ForgotPasswordForm.vue';
 
 // Our routes
 const routes = [
@@ -35,6 +37,22 @@ const routes = [
         component: Dashboard,
         meta: {
             auth: true
+        }
+    },
+    {
+        path: '/reset-password',
+        name: 'reset-password',
+        component: ForgotPassword,
+        meta: {
+            auth: false
+        }
+    },
+    {
+        path: '/reset-password/:token',
+        name: 'reset-password-form',
+        component: ForgotPasswordForm,
+        meta: {
+            auth: false
         }
     }
 ];
