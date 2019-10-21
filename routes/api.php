@@ -30,7 +30,7 @@ Route::prefix('auth')->group(function () {
     // Send reset password mail
     Route::post('reset-password', 'AuthController@sendPasswordResetLink');
     // handle reset password form process
-    Route::post('reset/password', 'AuthController@callResetPassword');
+    Route::post('reset/password/{token}', 'AuthController@callResetPassword');
 });
 
 Route::group(['middleware' => 'auth:api'], function(){
