@@ -40,28 +40,37 @@ Then modify the DB_* values in .env with your DB config. Also set up the MAIL_US
 php artisan key:generate
 ```
 
-5.Generate JWT key
+5. Generate JWT key
 ```
 php artisan jwt:secret
 ```
 
-6. Install Node dependencies
+6. Run migration and populate table
+```
+php artisan migrate --seed
+```
+
+7. Install Node dependencies
 ```
 npm install
 ```
 
-7. Run the following command
+8. Run the following command
 ```
 npm run watch
 ```
 
-8. If there are no errors, in another terminal run the following
+9. If there are no errors, in another terminal run the following
 ```
 php artisan serve
 ```
 Make sure the port 8000 is not in use. You can use another port by adding
 ```--port PORT_NUMBER``` to the previous command.
 Your application should be running at: http://127.0.0.1:8000
+
+Testing credentials:
+email: test@test.test
+password: test
 
 ## License
 
