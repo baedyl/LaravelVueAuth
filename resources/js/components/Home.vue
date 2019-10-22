@@ -4,7 +4,7 @@
             <div class="card-header">Home</div>
             <div class="card-body">
                 Welcome to the home page!
-                <p><router-link :to="{ name : 'dashboard' }" :key="key" class="nav-link">Go to the dashboard</router-link></p>
+                <p><router-link :to="{ name : 'dashboard' }" class="nav-link">Go to the dashboard</router-link></p>
                 
             </div>
         </div>
