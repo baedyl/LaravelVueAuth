@@ -3394,7 +3394,7 @@ __webpack_require__.r(__webpack_exports__);
           });
         },
         error: function error(resp) {
-          console.log(resp.response.data.errors);
+          // console.log(resp.response.data.errors);
           app.has_error = true;
           app.error = resp.response.data.error, app.errors = resp.response.data.errors || {};
         },
@@ -22973,7 +22973,7 @@ var render = function() {
               },
               [
                 _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "email" } }, [_vm._v("E-mail")]),
+                  _c("label", { attrs: { for: "email" } }, [_vm._v("Email")]),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -22988,7 +22988,7 @@ var render = function() {
                     attrs: {
                       type: "email",
                       id: "email",
-                      placeholder: "user@example.com",
+                      placeholder: "Your email address",
                       required: ""
                     },
                     domProps: { value: _vm.email },
@@ -23208,11 +23208,7 @@ var render = function() {
           [
             _c(
               "router-link",
-              {
-                key: _vm.key,
-                staticClass: "nav-link",
-                attrs: { to: { name: "dashboard" } }
-              },
+              { staticClass: "nav-link", attrs: { to: { name: "dashboard" } } },
               [_vm._v("Go to the dashboard")]
             )
           ],
@@ -23246,7 +23242,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "card card-default" }, [
-      _c("div", { staticClass: "card-header" }, [_vm._v("Authentication")]),
+      _c("div", { staticClass: "card-header" }, [_vm._v("Login")]),
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
         _vm.error
@@ -23343,7 +23339,6 @@ var render = function() {
                 _c(
                   "router-link",
                   {
-                    key: _vm.key,
                     staticClass: "nav-link",
                     attrs: { to: { name: "reset-password" } }
                   },
@@ -23355,8 +23350,8 @@ var render = function() {
             _vm._v(" "),
             _c(
               "button",
-              { staticClass: "btn btn-default", attrs: { type: "submit" } },
-              [_vm._v("Sign In")]
+              { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+              [_vm._v("Connect")]
             )
           ]
         )
@@ -23731,8 +23726,8 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "button",
-                  { staticClass: "btn btn-default", attrs: { type: "submit" } },
-                  [_vm._v("Submit")]
+                  { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+                  [_vm._v("Register")]
                 )
               ]
             )

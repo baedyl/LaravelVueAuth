@@ -7,8 +7,8 @@
           <div class="card-body">
             <form autocomplete="on" @submit.prevent="requestResetPassword" method="post">
               <div class="form-group">
-                  <label for="email">E-mail</label>
-                  <input type="email" id="email" class="form-control" placeholder="user@example.com" v-model="email" required>
+                  <label for="email">Email</label>
+                  <input type="email" id="email" class="form-control" placeholder="Your email address" v-model="email" required>
               </div>
               <button type="submit" class="btn btn-primary">Send Password Reset Link</button>
             </form>

@@ -26,7 +26,7 @@
                         <input type="password" name="password" id="password" class="form-control" v-model="password" required>
                         <span class="help-block" v-if="has_error && errors.password">{{ errors.password }}</span>
                     </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
+                    <button type="submit" class="btn btn-primary">Register</button>
                 </form>
             </div>
         </div>
@@ -63,7 +63,7 @@ export default {
                     });
                 },
                 error: function (resp) {
-                    console.log(resp.response.data.errors);
+                    // console.log(resp.response.data.errors);
                     app.has_error = true;
                     app.error = resp.response.data.error,
                     app.errors = resp.response.data.errors || {}

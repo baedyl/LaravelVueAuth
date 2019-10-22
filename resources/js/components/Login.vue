@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="card card-default">
-            <div class="card-header">Authentication</div>
+            <div class="card-header">Login</div>
             <div class="card-body">
                 <div class="alert alert-danger" v-if="error">
                     <p>{{ error }}</p>
@@ -16,10 +16,10 @@
                         <input type="password" name="password" id="password" class="form-control" v-model="password" required>
                     </div>
                     <div class="form-group">
-                        <router-link :to="{ name : 'reset-password' }" :key="key" class="nav-link">Forgot password?</router-link>
+                        <router-link :to="{ name : 'reset-password' }" class="nav-link">Forgot password?</router-link>
                     </div>
 
-                    <button type="submit" class="btn btn-default">Sign In</button>
+                    <button type="submit" class="btn btn-primary">Connect</button>
                 </form>
             </div>
         </div>

@@ -4,13 +4,13 @@
             <nav>
                 <ul class="list-inline">
                     <li>
-                        <router-link :to="{ name: 'home' }">Home</router-link>
+                        <router-link :to="{ name: 'home' }">Accueil</router-link>
                     </li>
                     <li class="pull-right">
-                        <router-link :to="{ name: 'login' }">Login</router-link>
+                        <router-link :to="{ name: 'login' }">Connexion</router-link>
                     </li>
                     <li class="pull-right">
-                        <router-link :to="{ name: 'register' }">Register</router-link>
+                        <router-link :to="{ name: 'register' }">Inscription</router-link>
                     </li>
                 </ul>
             </nav>
